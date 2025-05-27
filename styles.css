@@ -24,3 +24,48 @@ body {
   tr {
     margin-left: 8px;
   }
+
+  .form_display {
+    width: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .bookForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .bookForm input {
+    margin-top: 8px;
+    padding: 6px;
+    border: none;
+  }
+
+  .formBtn {
+    background-color: blue;
+    color: white;
+    padding: 8px;
+    width: 100%;
+  }
+
+  .formBtn:hover {
+    cursor: pointer;
+    outline: blue;
+    background-color: none;
+  }
+
+.btn_wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.bookBtn {
+    padding: 8px 8px;
+}

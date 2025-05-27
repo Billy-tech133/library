@@ -7,6 +7,7 @@
 </head>
 <body>
     <h2 class="title">Hello world, this is my library application</h2>
+    <!-- book display table  -->
     <table id="card_table">
         <thead>
             <tr>
@@ -17,9 +18,22 @@
             </tr>
         </thead>
         <tbody>
-
+            <button class="delete_btn" id="">delete book</button>
         </tbody>
     </table>
+    <!-- book form -->
+    <div class="btn_wrapper">
+        <button class="bookBtn" id="bookBtn">New Book</button>
+    </div>
+    <div class="form_display" id="form_wrapper">
+        <h1>Create a new book</h1>
+        <form action="" class="bookForm" id="formId">
+            <input type="text" placeholder="book name" id="bookName" >
+            <input type="text" placeholder="book Author" id="bookAuthor" >
+            <input type="number" placeholder="release year" id="bookYear">
+            <input type="submit" name="submit" id="submitBtn" class="formBtn">
+        </form>
+    </div>
     <script src="script.js"></script>
 </body>
 
