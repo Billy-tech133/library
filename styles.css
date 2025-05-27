@@ -1,0 +1,26 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f0f0f0;
+  }
+
+  .title {
+    text-align: center;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  table {
+    margin: 20px auto;
+    border-spacing: 20px;
+  }
+
+  td {
+    text-align: center;
+  }
+
+  tr {
+    margin-left: 8px;
+  }
