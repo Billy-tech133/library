@@ -1,2 +1,2 @@
 # library
-A HTML, CSS and JavaSCript project 
+A HTML, CSS and JavaScript project 
