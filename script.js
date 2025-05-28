@@ -2,37 +2,8 @@ let bookBtn = document.getElementById("bookBtn");
 let form_wrapper = document.getElementById("form_wrapper");
 let form = document.getElementById("formId");
 let buttonCell;
-const myLibrary = JSON.parse(localStorage.getItem("myLibrary")) || [
-    book1 = {
-        id: crypto.randomUUID(),
-        name: "Harry Potter",
-        author: "JK Rowlins",
-        year: 1999,
-        isRead: false
-    },
-    book2 = {
-        id: crypto.randomUUID(),
-        name: "atomic habits",
-        author: "James Clear",
-        year: 2018,
-        isRead: false
-    },
-    book3 = {
-        id: crypto.randomUUID(),
-        name: "48 Laws Of Power",
-        author: "Robert Greene",
-        year: 1998,
-        isRead: false
-    },
-    book4 = {
-        id: crypto.randomUUID(),
-        name: "Relentless",
-        author: "Tim Groover",
-        year: 2021,
-        isRead: false
-    }
 
-];
+let myLibrary = JSON.parse(localStorage.getItem("myLibrary")) || [];
 
 
 
@@ -46,7 +17,18 @@ function Book(id, name, author, year, isRead) {
     this.author = author
     this.year = year
     this.isRead = isRead
+
 }
+
+Book.prototype.changeReadStatus = function(isRead) {
+    if(this.isRead === false) {
+        return isRead === true
+    } else {
+        return isRead === false
+    }
+
+}
+
 
 function addBookToLibrary(id, name, author, year, isRead) {
     const newBook = new Book(id, name, author, year, isRead)
@@ -60,9 +42,8 @@ function displayBooks() {
     const table = document.querySelector("#card_table tbody");
     table.innerHTML = "";
 
-    
-    myLibrary.forEach((book, index) => {
 
+    myLibrary.forEach((book, index) => {
         const row = document.createElement('tr');
         const numberCell = document.createElement('td');
 
@@ -77,25 +58,55 @@ function displayBooks() {
         const bookYearCell = document.createElement('td');
         bookYearCell.textContent = book.year;
 
-        buttonCell = document.createElement('button')
-        buttonCell.textContent = "delete book"
+        const bookRead = document.createElement('td');
+        bookRead.textContent = book.isRead
 
-        buttonCell.onclick = function() {
-            myLibrary.filter((book) => book.id != id);
-        }
+        let buttonRead = document.createElement('button')
+        buttonRead.textContent = "Read";
+        buttonRead.classList.add('read_btn')
+        buttonRead.addEventListener('click', () => {
+           book.changeReadStatus(book.isRead)
+        })
+        
+        
+        buttonCell = document.createElement('button')
+        buttonCell.textContent = "delete book";
+        buttonCell.setAttribute("data-index", book.id)
+        buttonCell.setAttribute("class", "delete_btn")
+
+        
 
         row.appendChild(numberCell);
         row.appendChild(bookNameCell);
         row.appendChild(bookAuthorCell);
         row.appendChild(bookYearCell);
+        row.appendChild(bookRead);
+        row.appendChild(buttonRead)
         row.appendChild(buttonCell)
         table.appendChild(row)
+
+        handleBookDelete();
+
     })
 }
 
-// buttonCell.onclick = () => {
-//     myLibrary.filter((book) => book.id != id)
-// }
+function handleBookDelete() {
+    const deleteButtons = document.querySelectorAll(".delete_btn")
+    
+    deleteButtons.forEach((btn) => {
+        btn.addEventListener("click", function() {
+            const bookIndex = this.getAttribute("data-index")
+            myLibrary = myLibrary.filter((book) => book.id !== bookIndex);
+            localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+            displayBooks()
+        })
+    })
+}
+
+
+ 
+
+
 
 function toggleForm() {
     if(form_wrapper.style.display === "none" || form_wrapper.style.display === "") {
@@ -112,11 +123,9 @@ form.addEventListener('submit', function(){
     const name = document.getElementById("bookName").value
     const author = document.getElementById("bookAuthor").value
     const year = document.getElementById("bookYear").value
-
-    addBookToLibrary(crypto.randomUUID(), name, author, year)
-    
+    addBookToLibrary(crypto.randomUUID(), name, author, year, isRead=false)
 })
 
 
-
 displayBooks()
+
