@@ -8,25 +8,28 @@ let myLibrary = JSON.parse(localStorage.getItem("myLibrary")) || [];
 
 
 
-function Book(id, name, author, year, isRead) {
-    if(!new.target) {
-        throw Error("the new keyword cannot be missing")
+class Book {
+   constructor (id, name, author, year, isRead) {
+        if(!new.target) {
+            throw Error("the new keyword cannot be missing")
+        }
+        this.id = id
+        this.name = name
+        this.author = author
+        this.year = year
+        this.isRead = isRead
     }
-    this.id = id
-    this.name = name
-    this.author = author
-    this.year = year
-    this.isRead = isRead
+
+
 
 }
 
-Book.prototype.changeReadStatus = function(isRead) {
+Book.prototype.changeReadStatus = function() {
     if(this.isRead === false) {
         return isRead === true
     } else {
         return isRead === false
     }
-
 }
 
 
@@ -64,6 +67,7 @@ function displayBooks() {
         let buttonRead = document.createElement('button')
         buttonRead.textContent = "Read";
         buttonRead.classList.add('read_btn')
+
         
         
         
@@ -127,4 +131,3 @@ form.addEventListener('submit', function(){
 
 
 displayBooks()
-
